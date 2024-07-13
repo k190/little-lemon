@@ -1,0 +1,41 @@
+/* styles.css */
+.container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr); /* 12 equal columns */
+    grid-gap: 8px; /* 8px gap between rows and columns */
+    width: 1440px;
+    height: 2900px;
+    margin: 0 auto; /* Center the container */
+}
+
+.header {
+    grid-column: span 12;
+    grid-row: span 1;
+    background-color: lightblue;
+    padding: 20px;
+}
+
+.sidebar {
+    grid-column: span 3;
+    grid-row: span 4;
+    background-color: lightcoral;
+    padding: 20px;
+}
+
+.main-content {
+    grid-column: span 9;
+    grid-row: span 4;
+    background-color: lightgreen;
+    padding: 20px;
+}
+
+.footer {
+    grid-column: span 12;
+    grid-row: span 1;
+    background-color: lightgray;
+    padding: 20px;
+}
+.nav-logo {
+    height: 5px; /* Adjust the height as needed */
+    margin-right: 2px; /* Add space between the logo and the text */
+}

@@ -1,8 +1,10 @@
 import React from "react";
+import './styles.css';
+import Logo from '../images/Logo.jpg'
 const Nav = () => (
     <nav>
         <div className="nav-logo">
-            <img src="../images/Logo" alt="Company Logo" />
+            <img src={Logo} alt="Company Logo" />
         </div>
          <ul>
             <li><a href="#home">Home</a></li>
