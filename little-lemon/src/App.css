@@ -35,18 +35,4 @@
   to {
     transform: rotate(360deg);
   }
- 
-}
-.container {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr); /* 12 equal columns */
-  grid-gap: 8px; /* 8px gap between rows and columns */
-  width: 1440px;
-  height: 2900px;
-  margin: 0 auto; /* Center the container */
-}
-
-.item {
-  grid-column: span 3; /* Example: spanning 3 columns */
-  grid-row: span 2; /* Example: spanning 2 rows */
 }

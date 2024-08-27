@@ -1,9 +1,10 @@
 import React from 'react';
 import './styles.css';
+import Logo_footer from '../images/Logo_footer.png'
 const Footer = () => (
     <footer>
         <div className="footer-logo">
-            <img src="../images/Logo.jpg" alt="Company Logo" />
+          <img src={Logo_footer} alt="Company Logo" />
         </div>
         <div className="footer-nav">
             <h4>Quick Links</h4>
