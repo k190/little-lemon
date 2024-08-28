@@ -7,14 +7,14 @@ import Main from './components/Main';
 import Footer from './components/Footer';
 function App() {
   return (
-    <>
-    <body>
-      <Header />
-      <Nav />
-      <Main />
-      <Footer />
-    </body>
-    </>
+    <div className="container">
+      <body>
+        <Header />
+        <Nav />
+        <Main />
+        <Footer />
+      </body>
+    </div>
   );
 }
 

@@ -1,233 +1,188 @@
-/* Base styles (desktop) */
+/* Base styles */
+body {
+    margin: 0;
+    
+    font-family: Arial, sans-serif;
+}
 .container {
     display: grid;
-    grid-template-columns: repeat(12, 1fr); /* 12 equal columns */
-    grid-gap: 8px; /* 8px gap between rows and columns */
-    width: 100%; /* Use percentage instead of fixed width */
-    max-width: 1440px; /* Set a max width for larger screens */
-    margin: 0 auto; /* Center the container */
-    padding: 0 20px; /* Add padding for content inside */
+     gap: 8px;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+  
+    flex: 1; /* Allow the container to grow and fill available space */
 }
 
-.header {
-    grid-column: span 12;
-    grid-row: span 1;
-    background-color: lightblue;
+/* Header and Footer */
+.header, .footer {
     padding: 20px;
+    background-color: lightblue;
+    text-align: center;
 }
 
+/* Sidebar */
 .sidebar {
-    grid-column: span 3;
-    grid-row: span 4;
     background-color: lightcoral;
     padding: 20px;
 }
 
-
-
-.footer {
-    grid-column: span 12;
-    grid-row: span 1;
-    background-color: lightgray;
-    padding: 20px;
+/* Main Content */
+.main-content {
+    display: flex;
+    flex-direction: column; /* Stack each section vertically */
+    gap: 20px; /* Gap between each section */
+    
+    background-color: lightgreen;
+}
+.main-content img {
+    max-height: 50px;
 }
 
+.Hero-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns */
+    gap: 20px;
+    background-color: #495E57;
+    position: relative; /* Set the position relative for the section */
+    padding: 20px; /* Add some padding to prevent content from touching the edges */
+}
+
+.Hero-section img {
+    max-height: 300px;
+    width: 80%; /* Ensure the image takes up the full width of its grid area */
+    grid-column: 2 / 3; /* Ensure it stays in the second column */
+    position: relative; /* Set the position to relative */
+    margin-bottom:-10%; /* Move the image left by 20px to extend beyond the div */
+}
+
+.highlights {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three equal columns */
+    gap: 20px;
+    padding-left: 8%;
+    padding-right: 6%;
+}
+.highlights img {
+    max-height: 200px;
+    width: 100%;
+}
+.testimonials{
+    display:grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 20px;
+    
+}
+.About{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+}
+    /* Articles in rows within each section */
+.highlights article, .testimonials article, .About article {
+    grid-column: span 1; /* Each article occupies one column */
+    background-color: white;
+}
+
+/* Align h1 elements in a column outside of the grid */
+.Hero-section h1, .highlights h1, .testimonials h1, .About h1 {
+    grid-column: 1 / -1; /* Make sure the h1 spans the full width */
+    margin-bottom: 20px; /* Space below the h1 */
+}
+
+/* Navigation */
 nav {
     display: flex;
-    align-items: center; /* Aligns items vertically in the center */
-    justify-content: space-between; /* Spaces out the logo and nav list */
-    padding: 10px 20px; /* Adds some padding around the nav */
-    background-color: #fff; /* Example background color */
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #fff;
 }
 
 .nav-logo img {
-    max-height: 50px; /* Keeps the logo at a reasonable size */
+    max-height: 50px;
 }
 
 .nav-list {
-    display: flex; /* Aligns list items horizontally */
-    list-style: none; /* Removes default bullet points */
+    display: flex;
+    list-style: none;
     margin: 0;
     padding: 0;
 }
 
 .nav-list li {
-    margin-left: 20px; /* Adds spacing between each link */
+    margin-left: 20px;
 }
 
 .nav-list li a {
-    text-decoration: none; /* Removes underline from links */
-    color: #333; /* Sets the link color */
-    padding: 8px 16px; /* Adds padding around the link for better click area */
-    font-weight: bold; /* Makes the text bold */
+    text-decoration: none;
+    color: #333;
+    padding: 8px 16px;
+    font-weight: bold;
 }
 
-.nav-list li a:hover {
-    color: #007BFF; /* Example hover color */
-}
-
-/* Media Queries for Tablet and Mobile */
-@media (max-width: 768px) {
-    /* Adjust the container to have fewer columns */
-    .container {
-        grid-template-columns: repeat(6, 1fr); /* 6 columns on tablet */
-        padding: 0 10px; /* Reduce padding */
-    }
-
-    .header, .footer {
-        grid-column: span 6;
-    }
-
-    .sidebar {
-        grid-column: span 6; /* Make sidebar full-width */
-        grid-row: auto;
-        margin-bottom: 20px; /* Add spacing below sidebar */
-    }
-
-    .main-content {
-        grid-column: span 6; /* Make main content full-width */
-        grid-row: auto;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile */
-        padding: 0 5px; /* Further reduce padding */
-    }
-
-    .header, .footer {
-        grid-column: span 2; /* Full-width header and footer */
-    }
-
-    .sidebar {
-        grid-column: span 2; /* Full-width sidebar */
-        grid-row: auto;
-    }
-
-    .main-content {
-        grid-column: span 2; /* Full-width main content */
-        grid-row: auto;
-    }
-
-    /* Stack nav items vertically on mobile */
-    nav {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .nav-list {
-        flex-direction: column; /* Stack links vertically */
-    }
-
-    .nav-list li {
-        margin-left: 0;
-        margin-bottom: 10px; /* Add space between vertical links */
-    }
-
-    .nav-logo img {
-        max-height: 40px; /* Reduce logo size on mobile */
-    }
-}
+/* Footer */
 footer {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Flexible columns */
-    gap: 20px; /* Space between columns */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
     padding: 20px;
-    background-color: #f8f9fa; /* Light background color */
-    text-align: center; /* Center text in each section */
+    background-color: #f8f9fa;
+    text-align: center;
 }
 
 .footer-logo img {
-    max-width: 150px; /* Limit logo size */
-    height: auto; /* Maintain aspect ratio */
-    margin-bottom: 20px; /* Space below logo */
-}
-
-.footer-nav h4, .footer-contact h4, .footer-social h4 {
-    margin-bottom: 10px; /* Space below headings */
+    max-width: 150px;
+    margin-bottom: 20px;
 }
 
 .footer-nav ul, .footer-social ul {
-    list-style: none; /* Remove bullet points */
+    list-style: none;
     padding: 0;
     margin: 0;
 }
 
 .footer-nav li, .footer-social li {
-    margin-bottom: 10px; /* Space between list items */
+    margin-bottom: 10px;
 }
 
 .footer-nav a, .footer-social a {
-    text-decoration: none; /* Remove underline */
-    color: #007bff; /* Primary link color */
+    text-decoration: none;
+    color: #007bff;
 }
 
-.footer-nav a:hover, .footer-social a:hover {
-    text-decoration: underline; /* Underline on hover */
+.footer-contact a:hover, .footer-nav a:hover, .footer-social a:hover {
+    text-decoration: underline;
 }
 
-.footer-contact p {
-    margin: 5px 0; /* Space between contact details */
-}
-
-.footer-contact a {
-    color: #007bff; /* Link color */
-}
-
-.footer-contact a:hover {
-    text-decoration: underline; /* Underline on hover */
-}
-
-/* Media Queries for Responsive Design */
+/* Media Queries */
 @media (max-width: 768px) {
-    footer {
-        grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+    .header, .footer, .sidebar, .main-content {
+        padding: 10px;
+        text-align: center;
     }
 
-    .footer-logo {
-        grid-column: span 2; /* Full-width logo on tablets */
+    nav {
+        flex-wrap: wrap;
+    }
+
+    .nav-list {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-list li {
+        margin-left: 0;
+        margin-bottom: 10px;
     }
 }
 
 @media (max-width: 480px) {
+    .header, .footer, .sidebar, .main-content {
+        padding: 5px;
+        text-align: left;
+    }
+
     footer {
-        grid-template-columns: 1fr; /* Single column on mobile */
-        text-align: left; /* Align text to the left on mobile */
+        grid-template-columns: 1fr;
     }
-
-    .footer-logo, .footer-nav, .footer-contact, .footer-social {
-        grid-column: span 1; /* Each section takes full width on mobile */
-    }
-}
-/* Base styles for the entire layout */
-body {
-    margin: 0;
-    font-family: Arial, sans-serif; /* Set a default font */
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Ensure the body takes up full viewport height */
-}
-
-/* Main content styling */
-.main-content {
-    flex: 1; /* Allows main content to grow and fill available space */
-    padding: 20px;
-    background-color: lightgreen; /* Light background for the main content */
-}
-.main-content article {
-    max-width: 800px; /* Limits the width of the content */
-    margin: 0 auto; /* Centers the content horizontally */
-}
-
-.main-content h2 {
-    margin-top: 0; /* Remove margin at the top */
-}
-
-/* Footer styling */
-footer {
-    background-color: #f8f9fa; /* Light background for the footer */
-    padding: 20px;
-    text-align: center; /* Center align text in footer */
-    border-top: 1px solid #ddd; /* Optional: border on top of the footer */
 }
