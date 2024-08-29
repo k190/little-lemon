@@ -13,7 +13,9 @@ body {
   
     flex: 1; /* Allow the container to grow and fill available space */
 }
-
+.p {
+    text-align: center;
+}
 /* Header and Footer */
 .header, .footer {
     padding: 20px;
@@ -58,19 +60,21 @@ body {
 
 .highlights {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Three equal columns */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Three equal columns */
     gap: 20px;
     padding-left: 8%;
     padding-right: 6%;
-}
+}`
 .highlights img {
     max-height: 200px;
     width: 100%;
 }
 .testimonials{
     display:grid;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
     gap: 20px;
+    padding-left: 8%;
+    padding-right: 6%;
     
 }
 .About{
@@ -88,6 +92,11 @@ body {
     grid-column: 1 / -1; /* Make sure the h1 spans the full width */
     margin-bottom: 20px; /* Space below the h1 */
 }
+.About p,.About h1,.About h2{
+    width: 50%;             /* Takes up half of the page width */
+    margin: 0 auto;         /* Centers the element horizontally */
+        /* Optional: Centers the text inside the paragraph */
+  }
 
 /* Navigation */
 nav {
