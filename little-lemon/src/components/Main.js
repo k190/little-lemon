@@ -1,20 +1,34 @@
-import React, { useReducer, useState } from 'react';
+
+
+import React, { useReducer, useEffect, useState } from 'react';
 import BookingForm from './BookingForm';
 import './styles.css';
-import resturantfood from '../images/restauranfood.jpg'
-import {routes,route,Link}from 'react-router-dom'
-// Function to initialize available times
-const initializeTimes = () => {
-    return ['17:00', '18:00', '19:00', '20:00', '21:00', '22:00'];
+import resturantfood from '../images/restauranfood.jpg';
+import { Link } from 'react-router-dom';
+
+const initializeTimes = async () => {
+    const today = new Date();
+    try {
+        const availableTimes = await fetchAPI(today);
+        return availableTimes;
+    } catch (error) {
+        console.error("Failed to fetch available times:", error);
+        return [];
+    }
 };
-  // Reducer function to update available times
-const updateTimes = (state, action) => {
+
+const updateTimes = async (state, action) => {
     switch (action.type) {
-      case 'UPDATE_TIMES':
-        // For now, return the same times regardless of the date
-        return initializeTimes();
-      default:
-        return state;
+        case 'UPDATE_TIMES':
+            try {
+                const availableTimes = await fetchAPI(action.date);
+                return availableTimes;
+            } catch (error) {
+                console.error("Failed to fetch available times:", error);
+                return [];
+            }
+        default:
+            return state;
     }
 };
 const Main = () => {
@@ -22,8 +36,17 @@ const Main = () => {
     const [time, setTime] = useState('');
     const [guests, setGuests] = useState(1);
     const [occasion, setOccasion] = useState('');
-    const [availableTimes, dispatch] = useReducer(updateTimes, [], initializeTimes);
-    const handleDateChange = (selectedDate) => {
+    const [availableTimes, dispatch] = useReducer((state, action) => state, []);
+
+    useEffect(() => {
+        const initTimes = async () => {
+            const times = await initializeTimes();
+            dispatch({ type: 'INIT_TIMES', times });
+        };
+        initTimes();
+    }, []);
+
+    const handleDateChange = async (selectedDate) => {
         setDate(selectedDate);
         dispatch({ type: 'UPDATE_TIMES', date: selectedDate });
       };
@@ -39,7 +62,7 @@ const Main = () => {
       setOccasion,
       availableTimes,
     };
-  
+
     return (
         <div className="main-content">
             <div className="Hero-section">
@@ -47,25 +70,26 @@ const Main = () => {
                     <h1>Little Lemon</h1>
                     <h2>chicago</h2>
                     <p>By completing this exercise, you have a complete CSS code for the HTML elements which you can use to style the elements in your project.</p>
-                    <button>Reserv a Table</button>  
-                    <Link to="/BookingForm"className="BookingForm">BookingForm</Link>                
+                    <Link to="/BookingPage">
+                        <button>Reserve a Table</button>
+                    </Link>
                 </article>
                 <article>
-                    <img src={resturantfood} alt="resturantfoodd" />
+                    <img src={resturantfood} alt="restaurant food" />
                 </article>
             </div>
             <div>
-            <BookingForm
-                date={date}
-                setDate={handleDateChange} 
-                time={time}
-                setTime={setTime}
-                guests={guests}
-                setGuests={setGuests}
-                occasion={occasion}
-                setOccasion={setOccasion}
-                availableTimes={availableTimes}
-      />
+                <BookingForm
+                    date={date}
+                    setDate={handleDateChange}
+                    time={time}
+                    setTime={setTime}
+                    guests={guests}
+                    setGuests={setGuests}
+                    occasion={occasion}
+                    setOccasion={setOccasion}
+                    availableTimes={availableTimes}
+                />
             </div>
             <div className="highlights">
                 <h1>Specials</h1>
@@ -118,8 +142,8 @@ const Main = () => {
               
 
             </div>
-        </div>   
+        </div>
     );
-}
+};
 
 export default Main;
