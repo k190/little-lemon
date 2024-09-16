@@ -1,4 +1,5 @@
 import React from "react";
+
 function BookingForm({
   date,
   setDate,
@@ -9,10 +10,12 @@ function BookingForm({
   occasion,
   setOccasion,
   availableTimes,
+  onSubmit, // Add this prop
 }) {
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ date, time, guests, occasion });
+    // Call the onSubmit prop with current form data
+    onSubmit({ date, time, guests, occasion });
   };
 
   return (

@@ -1,7 +1,11 @@
-import { render, screen } from '@testing-library/react';
+import React from 'react';
+import { render, screen, waitFor  } from '@testing-library/react';
 import App from './App';
+import { act } from 'react';
 import BookingForm from './components/BookingForm';
-
+import BookingPage from './components/BookingPage'; // Adjust the path if needed
+import { fetchAPI } from './components/BookingPage'; // Adjust the path if needed
+import { updateTimes } from './components/BookingPage'; 
 /*test('renders learn react link', () => {
   render(<App />);
   const linkElement = screen.getByText(/learn react/i);

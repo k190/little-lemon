@@ -1,63 +1,87 @@
 import React, { useReducer, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import BookingForm from './BookingForm';
 import './styles.css';
 
-// Fetch API function
+// Simulated fetchAPI function
 const fetchAPI = async (date) => {
-    // Simulated API call
-    console.log('Fetching available times for date:', date);
+  console.log('Fetching available times for date:', date);
+  // Simulated response
+  return ['17:00', '18:00', '19:00', '20:00', '21:00', '22:00'];
+};
 
-    return ['17:00', '18:00', '19:00', '20:00', '21:00', '22:00'];
+// Simulated submitAPI function
+const submitAPI = async (formData) => {
+  console.log('Submitting form data:', formData);
+  // Simulated response
+  return true; // Assume submission is successful
 };
 
 // Reducer function for managing available times
 const updateTimes = (state, action) => {
-    switch (action.type) {
-        case 'UPDATE_TIMES':
-            return action.times; // Update state with new available times
-        default:
-            return state;
-    }
+  switch (action.type) {
+    case 'UPDATE_TIMES':
+      return action.times;
+    default:
+      return state;
+  }
 };
 
 const BookingPage = () => {
-    const [date, setDate] = useState('');
-    const [time, setTime] = useState('');
-    const [guests, setGuests] = useState(1);
-    const [occasion, setOccasion] = useState('');
-    const [availableTimes, dispatch] = useReducer(updateTimes, []); // Initialize state as empty array
+  const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
+  const [guests, setGuests] = useState(1);
+  const [occasion, setOccasion] = useState('');
+  const [availableTimes, dispatch] = useReducer(updateTimes, []);
+  const navigate = useNavigate();
 
-    // Fetch initial available times on component mount or when the date changes
-    useEffect(() => {
-        const fetchTimes = async () => {
-            if (date) { // Only fetch if a date is selected
-                const times = await fetchAPI(date);
-                dispatch({ type: 'UPDATE_TIMES', times });
-            }
-        };
-
-        fetchTimes();
-    }, [date]); 
-
-    // Handle date change
-    const handleDateChange = (selectedDate) => {
-        setDate(selectedDate); // Update date state
+  // Fetch available times when date changes
+  useEffect(() => {
+    const fetchTimes = async () => {
+      if (date) {
+        const times = await fetchAPI(date);
+        dispatch({ type: 'UPDATE_TIMES', times });
+      }
     };
-    return (
-        <div>
-            <BookingForm
-                date={date}
-                setDate={handleDateChange} 
-                time={time}
-                setTime={setTime}
-                guests={guests}
-                setGuests={setGuests}
-                occasion={occasion}
-                setOccasion={setOccasion}
-                availableTimes={availableTimes} // Pass the updated times
-            />
-        </div>
-    );
+
+    fetchTimes();
+  }, [date]);
+
+  // Handle form submission
+  const submitForm = async (formData) => {
+    try {
+      const success = await submitAPI(formData);
+      if (success) {
+        navigate('/BookingConfirmed'); // Navigate to confirmation page
+      } else {
+        console.error('Failed to submit the form');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
+  };
+
+  // Handle date change
+  const handleDateChange = (selectedDate) => {
+    setDate(selectedDate);
+  };
+
+  return (
+    <div>
+      <BookingForm
+        date={date}
+        setDate={handleDateChange}
+        time={time}
+        setTime={setTime}
+        guests={guests}
+        setGuests={setGuests}
+        occasion={occasion}
+        setOccasion={setOccasion}
+        availableTimes={availableTimes}
+        onSubmit={submitForm} // Pass submitForm function as prop
+      />
+    </div>
+  );
 };
 
 export default BookingPage;
