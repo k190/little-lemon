@@ -1,67 +1,63 @@
-import React, { useReducer, useState } from 'react';
+import React, { useReducer, useState, useEffect } from 'react';
 import BookingForm from './BookingForm';
 import './styles.css';
+
+// Fetch API function
 const fetchAPI = async (date) => {
-    // Replace this with your actual API call
     // Simulated API call
+    console.log('Fetching available times for date:', date);
+
     return ['17:00', '18:00', '19:00', '20:00', '21:00', '22:00'];
 };
 
-const initializeTimes = async () => {
-    const today = new Date();
-    try {
-        const availableTimes = await fetchAPI(today);
-        return availableTimes;
-    } catch (error) {
-        console.error("Failed to fetch available times:", error);
-        return []; // Return an empty array on failure
-    }
-};
-
-const updateTimes = async (state, action) => {
+// Reducer function for managing available times
+const updateTimes = (state, action) => {
     switch (action.type) {
         case 'UPDATE_TIMES':
-            const availableTimes = await fetchAPI(action.date);
-            return availableTimes;
+            return action.times; // Update state with new available times
         default:
             return state;
     }
 };
+
 const BookingPage = () => {
     const [date, setDate] = useState('');
     const [time, setTime] = useState('');
     const [guests, setGuests] = useState(1);
     const [occasion, setOccasion] = useState('');
-    const [availableTimes, dispatch] = useReducer(updateTimes, [], initializeTimes);
+    const [availableTimes, dispatch] = useReducer(updateTimes, []); // Initialize state as empty array
+
+    // Fetch initial available times on component mount or when the date changes
+    useEffect(() => {
+        const fetchTimes = async () => {
+            if (date) { // Only fetch if a date is selected
+                const times = await fetchAPI(date);
+                dispatch({ type: 'UPDATE_TIMES', times });
+            }
+        };
+
+        fetchTimes();
+    }, [date]); 
+
+    // Handle date change
     const handleDateChange = (selectedDate) => {
-        setDate(selectedDate);
-        dispatch({ type: 'UPDATE_TIMES', date: selectedDate });
-      };
-    // Create a single props object to pass to BookingForm
-    const bookingProps = {
-      date,
-      setDate,
-      time,
-      setTime,
-      guests,
-      setGuests,
-      occasion,
-      setOccasion,
-      availableTimes,
+        setDate(selectedDate); // Update date state
     };
     return (
         <div>
-        <BookingForm
-            date={date}
-            setDate={handleDateChange} 
-            time={time}
-            setTime={setTime}
-            guests={guests}
-            setGuests={setGuests}
-            occasion={occasion}
-            setOccasion={setOccasion}
-            availableTimes={availableTimes}
-  />
-        </div>)
-        }
-        export default BookingPage;
+            <BookingForm
+                date={date}
+                setDate={handleDateChange} 
+                time={time}
+                setTime={setTime}
+                guests={guests}
+                setGuests={setGuests}
+                occasion={occasion}
+                setOccasion={setOccasion}
+                availableTimes={availableTimes} // Pass the updated times
+            />
+        </div>
+    );
+};
+
+export default BookingPage;
