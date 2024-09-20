@@ -9,12 +9,11 @@ const Nav = () => (
         </div>
          <ul className="nav-list">
            
-            <Link to="/HomePage"className="HomePage">Home</Link>
-            
+            <li><Link to="/HomePage"className="HomePage">Home</Link></li>
             <li><a href="#about">About</a></li>
-            <Link to="/Main"className="Main">main</Link>
+            <li><Link to="/Main"className="Main">main</Link></li>
             <li><a href="#menu">Reservations</a></li>
-            <li><a href="#order-online">Order online</a></li>
+            <li> <Link to="/BookingPage">Order onlinee</Link></li>
             <li><a href="#login">Login</a></li>
         </ul>
     </nav>

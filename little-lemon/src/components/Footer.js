@@ -1,6 +1,7 @@
 import React from 'react';
 import './styles.css';
 import Logo_footer from '../images/Logo_footer.png'
+import { Link } from 'react-router-dom';
 const Footer = () => (
     <footer>
         <div className="footer-logo">
@@ -8,8 +9,8 @@ const Footer = () => (
         </div>
         <div className="footer-nav">
             <h4>Quick Links</h4>
-            <ul>
-                <li><a href="#home">Home</a></li>
+            <ul> 
+               <li><Link to="/HomePage"className="HomePage">Home</Link></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#contact">Contact</a></li>

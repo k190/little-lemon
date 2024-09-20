@@ -12,12 +12,6 @@ const Main = () => {
       <div>
       <HeroSecrion />
       </div>
-
-      {/*Bookingform*/}
-      <div>
-        <BookingPage/>
-      </div>
-
       {/* Highlights Section */}
       <div className="highlights">
         <h1>Specials</h1>

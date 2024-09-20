@@ -67,7 +67,8 @@ const BookingPage = () => {
   };
 
   return (
-    <div>
+    <div className="booking-container">
+      <h1>Reserve a Table</h1>
       <BookingForm
         date={date}
         setDate={handleDateChange}
