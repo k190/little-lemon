@@ -49,7 +49,9 @@ body {
 .main-content img {
     max-height: 50px;
 }
-
+.About img {
+    max-height: 50px;
+}
 .Hero-section {
     display: grid;
     grid-template-columns: 1fr 1fr; /* Two columns */

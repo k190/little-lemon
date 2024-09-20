@@ -11,7 +11,7 @@ const Footer = () => (
             <h4>Quick Links</h4>
             <ul> 
                <li><Link to="/HomePage"className="HomePage">Home</Link></li>
-                <li><a href="#about">About</a></li>
+               <li><Link to="/About"className="Abouts">About</Link></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>

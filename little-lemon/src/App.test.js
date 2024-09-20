@@ -101,7 +101,8 @@ describe('BookingForm Validation Tests', () => {
     expect(screen.getByText(/please select an occasion/i)).toBeInTheDocument();
   });
 
-  test('should submit form when all fields are valid', () => {
+
+   test('should submit form when all fields are valid', () => {
     render(<BookingForm {...defaultProps} />);
     
     fireEvent.change(screen.getByLabelText(/choose date/i), { target: { value: '2024-09-21' } });
@@ -118,5 +119,6 @@ describe('BookingForm Validation Tests', () => {
       occasion: 'birthday',
     });
   });
+  
 });
 
