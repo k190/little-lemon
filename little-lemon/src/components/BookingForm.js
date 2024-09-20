@@ -74,16 +74,22 @@ function BookingForm({
       {!timeValid && <span style={{ color: 'red' }}>Please select a time</span>}
 
       <label htmlFor="guests">Number of guests</label>
-      <input
-        type="number"
-        min="1"
-        max="10"
-        id="guests"
-        value={guests}
-        onChange={(e) => setGuests(e.target.value)}
-        required
+       <input
+         type="number"
+         min="1"
+         max="10"
+         id="guests"
+         value={guests}
+         onChange={(e) => setGuests(e.target.value)}
+         required
+         aria-label="On Click to select number of guests"
       />
-      {!guestsValid && <span style={{ color: 'red' }}>Guests should be between 1 and 10</span>}
+      {!guestsValid && (
+        <span style={{ color: 'red' }} aria-live="polite">
+         Guests should be between 1 and 10
+        </span>
+      )}
+
 
       <label htmlFor="occasion">Occasion</label>
       <select

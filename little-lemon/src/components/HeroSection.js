@@ -10,7 +10,7 @@ const HeroSection = ()=> {
                 <h2>chicago</h2>
                 <p>By completing this exercise, you have a complete CSS code for the HTML elements which you can use to style the elements in your project.</p>
                <Link to="/BookingPage">
-                 <button>Reserve a Table</button>
+                 <button aria-label="On Click to Reserve a Table">Reserve a Table</button>
                 </Link>                
             </article>
             <article>
