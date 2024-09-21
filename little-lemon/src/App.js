@@ -12,9 +12,11 @@ import HeroSection from  './components/HeroSection';
 import Highlights from  './components/Highlights';
 import Testimonials from './components/Testimonials';
 import About from  './components/About';
+import ServicePage from './components/ServicePage';
 import LoginPage from './components/loginPage';
 import ConfirmedBooking from  './components/ConfirmedBooking';
 import OrderOnlinePage from './components/OrderOnlinePage';
+import ContactPage from './components/ContactPage';
 function App() {
   return (
     <div className="container">
@@ -29,8 +31,10 @@ function App() {
         <Route path="/loginPage" element={<LoginPage/>} /> 
         <Route path='/Testimonials' element={<Testimonials />} />
         <Route path="/About" element={<About />} /> 
+        <Route path="/ServicePage" element={<ServicePage/>} /> 
         <Route path="/OrderOnlinePage" element={<OrderOnlinePage />} /> 
         <Route path="/BookingConfirmed" element={<ConfirmedBooking />} />
+        <Route path="/contactPage" element={<ContactPage />} />
         {/* Add other routes as needed */}
       </Routes>
       <Footer />

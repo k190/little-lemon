@@ -4,7 +4,7 @@ import  HeroSecrion from './HeroSection'
 import About from './About';
 const HomePage = ()=> {
     return( <div>
-      <h1>HomePage</h1>
+      <h1>Little Lemon Restaurant</h1>
       <HeroSecrion />
       <About />
       </div>
